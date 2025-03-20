@@ -1,0 +1,212 @@
+.container {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  padding: 30px;
+  width: 80%;
+  max-width: 800px;
+  margin: 50px auto; /* Increased top and bottom margin */
+  text-align: center;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25); /* Enhanced shadow */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInScale 0.6s ease-in-out;
+}
+
+
+
+/* Title */
+.title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Profile Picture Container */
+.profilePicContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.profilePic {
+  width: 120px; /* Increased size */
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #F68C1F;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.profilePlaceholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.uploadBtn {
+  background-color: #F68C1F;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.uploadBtn i {
+  font-size: 16px;
+}
+
+
+/* Form Grid */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Input Fields */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.inputGroup input,
+.inputGroup select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus {
+  box-shadow: 0px 0px 10px rgba(118, 206, 223, 0.8);
+  border-color: #F68C1F;
+}
+
+/* Buttons */
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.editBtn,
+.saveBtn {
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.editBtn {
+  background: linear-gradient(45deg, #F68C1F, #99D4BF);
+  color: white;
+}
+
+.saveBtn {
+  background: linear-gradient(45deg, #F68C1F, #FECF0A);
+  color: white;
+}
+
+.saveBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.editBtn:hover,
+.saveBtn:hover {
+  transform: scale(1.05);
+}
+
+
+/* Add More Button */
+.addBtn {
+  background: linear-gradient(45deg, #28a745, #62d762);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.addBtn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #218838, #4CAF50);
+}
+
+/* Remove Button */
+.removeBtn {
+  background: linear-gradient(45deg, #dc3545, #ff5c75);
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.removeBtn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #b52b3a, #e33445);
+}
+
+
+
+/* Fade-in with Scale Animation */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+

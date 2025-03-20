@@ -1,0 +1,147 @@
+/* How It Works Section */
+.how-it-works-section {
+    text-align: center;
+    padding: 80px 20px;
+    overflow: hidden;
+    background: linear-gradient(to right, #f8e7a5,#f3e5f5, #e0f7fa, #b3fae2, #fcc58f);
+    background-size: 200% 200%; /* Set the gradient to cover a large area */
+    position: relative;
+    animation: gradientMove 10s ease infinite; /* Add the moving animation */
+}
+
+/* How It Works Heading */
+.how-it-works-heading {
+    font-size: 2.8rem;
+    color: #333;
+    margin-bottom: 60px;
+    font-weight: bold;
+    animation: fadeIn 1s ease-out;
+}
+
+/* Steps Container */
+.steps-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-content: center;
+}
+
+/* Step Wrapper (for each step with arrow) */
+.step-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: column; /* Stack items vertically */
+}
+
+/* Step Shapes */
+.step {
+    text-align: center;
+    padding: 30px;
+    color: white;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 180px; /* Fix width for consistency */
+    height: 180px; /* Fix height for consistency */
+    margin-bottom: 20px; /* Add space below the shapes */
+}
+
+.step-circle {
+    border-radius: 50%;
+    background-color: #76cedf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-hexagon {
+    background-color: #99d4bf;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-rectangle {
+    background-color: #fecf0a;
+    width: 220px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+/* Step Icon */
+.step-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+
+/* Step Title */
+.step-title {
+    font-size: 1.4rem;
+    color: #444;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Step Description */
+.step-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+/* Arrows */
+.arrow {
+    font-size: 2rem;
+    color: #333;
+    animation: arrowBounce 1s infinite alternate;
+}
+
+/* Hover Effect for Step */
+.step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation Effects */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes arrowBounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Animation for moving the background gradient */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

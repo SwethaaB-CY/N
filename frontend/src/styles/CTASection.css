@@ -1,0 +1,57 @@
+/* CTA Section */
+.cta-section {
+    text-align: center;
+    padding: 60px 20px;
+    color: rgb(36, 35, 35); /* White text for contrast */
+  }
+  
+  /* CTA Heading */
+  .cta-heading {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* CTA Description */
+  .cta-description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+  
+  /* CTA Buttons Container */
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between buttons */
+  }
+  
+  /* CTA Button */
+  .cta-button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Primary Button */
+  .cta-button.primary {
+    background: #ee93be;
+    color: #fdfafd; /* Matching the gradient */
+  }
+  
+  /* Secondary Button */
+  .cta-button.secondary {
+    background: transparent;
+    border: 2px solid white;
+    color: #ee93be;
+  }
+  
+  /* Hover Effects */
+  .cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }

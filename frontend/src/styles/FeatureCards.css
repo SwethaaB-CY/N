@@ -1,0 +1,107 @@
+/* Feature Section */
+.feature-section {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+/* Feature Heading */
+.feature-heading {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+/* Feature Cards Container */
+.feature-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px; /* Space between cards */
+}
+
+/* Feature Card */
+.feature-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 330px; /* Slightly increased width */
+  height: 320px; /* Increased height */
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures spacing inside the card */
+  align-items: center;
+  overflow: hidden; /* Prevents text overflow */
+}
+
+/* Hover Effect */
+.feature-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Click Effect */
+.feature-card.active {
+  transform: scale(1.1);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* Feature Icon */
+.feature-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* Feature Title */
+.feature-title {
+  font-size: 1.4rem;
+  color: #444;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  white-space: normal; /* Allows title to wrap */
+  max-width: 100%;
+}
+
+/* Feature Description */
+.feature-description {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.5;
+  padding: 0 10px;
+  max-width: 90%;
+  text-align: center;
+  word-wrap: break-word; /* Ensures text wraps correctly */
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+  .feature-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .feature-card {
+    width: 280px; /* Adjusted for tablets */
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .feature-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-card {
+    width: 85%;
+    height: auto;
+    padding: 25px;
+  }
+}

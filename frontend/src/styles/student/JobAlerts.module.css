@@ -1,0 +1,80 @@
+.jobAlerts {
+    margin-top: 20px;
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .seeAll {
+    font-size: 0.9rem;
+    color: #76cedf;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .seeAll:hover {
+    text-decoration: underline;
+  }
+  
+  .jobList {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .jobCard {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .jobCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .jobInfo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .jobTitle {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .company {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .viewButton {
+    background: #fecf0a;
+    border: none;
+    padding: 8px 15px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .viewButton:hover {
+    background: #f8b400;
+  }
+  

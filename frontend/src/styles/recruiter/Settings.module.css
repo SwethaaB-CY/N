@@ -1,0 +1,71 @@
+.settings-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Glass effect */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .settings-container h2 {
+    font-size: 24px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+  }
+  
+  .theme-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .toggle-label {
+    font-size: 18px;
+    color: var(--text-color);
+  }
+  
+  .toggle-input {
+    width: 40px;
+    height: 20px;
+    position: relative;
+    appearance: none;
+    background: #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .toggle-input:checked {
+    background: #76CEDF;
+  }
+  
+  .toggle-input:before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 1px;
+    left: 2px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+  
+  .toggle-input:checked:before {
+    transform: translateX(20px);
+  }
+  

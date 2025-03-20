@@ -1,0 +1,123 @@
+/* Sidebar Container */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: rgba(118, 206, 223, 0.9); /* Glassmorphism effect */
+  backdrop-filter: blur(10px);
+  box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Logo */
+.profile {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile img {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Navigation */
+.nav {
+  width: 100%;
+}
+
+.nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.nav ul li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 20px;
+  margin: 12px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover Effect */
+.nav ul li:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar Icons */
+.icon {
+  font-size: 22px;
+  transition: transform 0.3s ease;
+}
+
+.nav ul li:hover .icon {
+  transform: scale(1.1);
+}
+
+/* Logout Button */
+.logout {
+  margin-top: auto;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.logout:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+
+/* Responsive Sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 70px;
+    padding: 10px;
+  }
+
+  .profile {
+    width: 60px;
+    height: 60px;
+  }
+
+  .nav ul li span {
+    display: none;
+  }
+
+  .logout span {
+    display: none;
+  }
+}
+
+
