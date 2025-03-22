@@ -1,54 +1,78 @@
 import Link from "next/link";
-import { JSX, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../styles/Navbar.css";
 
 interface NavbarProps {
   onLoginClick: () => void;
 }
 
-export default function Navbar({ onLoginClick }: NavbarProps): JSX.Element {
+export default function Navbar({ onLoginClick }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [dashboardPath, setDashboardPath] = useState<string>("");
 
-  // Check login status on component mount
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      const userType = localStorage.getItem("userType");
+
+      if (token) {
+        setIsLoggedIn(true);
+        setDashboardPath(getDashboardPath(userType));
+      }
+    }
   }, []);
 
-  // Logout function
+  const getDashboardPath = (userType: string | null): string => {
+    switch (userType?.toLowerCase()) {
+      case "student":
+        return "/dashboard/student-dashboard";
+      case "admin":
+        return "/dashboard/admin-dashboard";
+      case "recruiter":
+        return "/dashboard/recruiter-dashboard";
+      case "placement officer":
+        return "/dashboard/placement-dashboard";
+      default:
+        return "/dashboard";
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userType");
     setIsLoggedIn(false);
-    window.location.reload(); // Reload to reflect changes
+    setDashboardPath("");
+    window.location.href = "/";
   };
 
   return (
     <nav className="navbar">
-      {/* Left: Logo */}
       <div className="logo">
         <Link href="/">LOGO</Link>
       </div>
 
-      {/* Hamburger Menu Button */}
       <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
         <div className={`bar ${menuOpen ? "open" : ""}`}></div>
         <div className={`bar ${menuOpen ? "open" : ""}`}></div>
         <div className={`bar ${menuOpen ? "open" : ""}`}></div>
       </div>
 
-      {/* Center: Navigation Links */}
       <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
         <li>
           <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
         </li>
-        <li>
-          <Link href="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</Link>
-        </li>
+
+        {isLoggedIn && (
+          <li>
+            <Link href={dashboardPath} onClick={() => setMenuOpen(false)}>Dashboard</Link>
+          </li>
+        )}
+
         <li>
           <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
         </li>
+
         <li>
           {isLoggedIn ? (
             <button className="logout-btn" onClick={handleLogout}>
