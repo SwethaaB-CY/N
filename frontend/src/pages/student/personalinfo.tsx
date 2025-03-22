@@ -33,14 +33,15 @@ const PersonalInfo: React.FC = () => {
         }
 
         const data = await response.json();
-        setFormData({
-          fullName: data.fullName || "",
-          email: data.email || "",
-          phoneNumber: data.phoneNumber || "",
-          gender: data.gender || "",
-          collegeName: data.collegeName || "",
-          profilePicture: data.profilePicture || null,
-        });
+setFormData({
+  fullName: data.fullName || "",
+  email: data.email || "",
+  phoneNumber: data.phoneNumber || "",
+  gender: data.gender || "",
+  collegeName: data.student?.collegeName || "", // ✅ Extract correctly
+  profilePicture: data.profilePicture || null,
+});
+
 
 
       } catch (error) {

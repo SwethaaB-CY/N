@@ -54,27 +54,35 @@ export class StudentController {
       }),
     })
   )
-  async updateStudentProfile(
-    @Request() req,
-    @Body() updateStudentDto: UpdateStudentDto,
-    @UploadedFile() file: Express.Multer.File // ✅ Fix applied here
-  ) {
-    console.log("🔄 Updating Student ID:", req.user?.id);
+async updateStudentProfile(
+  @Request() req,
+  @Body() updateStudentDto: UpdateStudentDto,
+  @UploadedFile() file: Express.Multer.File
+) {
+  console.log("🔄 Updating Student ID:", req.user?.id);
 
-    if (!req.user?.id) {
-      console.error("❌ User ID is missing!");
-      throw new Error("Unauthorized access");
-    }
+  if (!req.user?.id) {
+    console.error("❌ User ID is missing!");
+    throw new Error("Unauthorized access");
+  }
 
+  try {
+    // ✅ Update profile picture if uploaded
     if (file) {
       console.log("✅ Uploaded file:", file.filename);
-      const filePath = `/uploads/${file.filename}`;
-      updateStudentDto.profilePicture = filePath;
-      console.log("📷 Profile picture path saved:", filePath);
+      updateStudentDto.profilePicture = `/uploads/${file.filename}`;
+      console.log("📷 Profile picture path saved:", updateStudentDto.profilePicture);
     } else {
       console.warn("⚠️ No file uploaded, keeping existing profile picture.");
     }
 
-    return this.studentService.updateStudent(req.user.id, updateStudentDto);
+    const updatedStudent = await this.studentService.updateStudent(req.user.id, updateStudentDto);
+    console.log("✅ Student updated successfully:", updatedStudent);
+
+    return { message: "Profile updated successfully", student: updatedStudent };
+  } catch (error) {
+    console.error("❌ Error updating student profile:", error);
+    throw new Error("Failed to update student profile.");
   }
+}
 }

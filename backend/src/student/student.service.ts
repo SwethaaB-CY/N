@@ -11,7 +11,7 @@ export class StudentService {
 
   // ✅ Get Student Profile
   async getStudentById(id: string) {
-    console.log("🔍 Fetching Student by ID:", id); // Debugging log
+    console.log("🔍 Fetching Student by ID:", id);
 
     if (!id) {
       console.error("❌ User ID is undefined. Authentication might be failing.");
@@ -26,8 +26,12 @@ export class StudentService {
           email: true,
           phoneNumber: true,
           gender: true,
-          collegeName: true,
-          profilePicture: true, // ✅ Ensure this field is in your Prisma schema
+          profilePicture: true,
+          student: {
+            select: {
+              collegeName: true,
+            },
+          },
         },
       });
 
@@ -45,27 +49,38 @@ export class StudentService {
 
   // ✅ Update Student Profile
   async updateStudent(id: string, data: UpdateStudentDto) {
-    console.log("🔄 Updating Student in DB:", id, data); // Debugging log
+    console.log("🔄 Updating Student in DB:", id, data);
 
     if (!id) {
       console.error("❌ Cannot update student: Missing ID.");
       throw new Error("User ID is missing. Cannot update student profile.");
     }
 
-    // Handle profile picture update correctly
-    const updateData: any = { ...data };
-    if (data.profilePicture) {
-      updateData.profilePicture = data.profilePicture; // ✅ Store the file path
-    }
-
     try {
-      const updatedStudent = await this.prisma.user.update({
+      const updatedUser = await this.prisma.user.update({
         where: { id },
-        data: updateData,
+        data: {
+          fullName: data.fullName,
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+          gender: data.gender,
+          profilePicture: data.profilePicture || null,
+          student: {
+            upsert: {
+              create: {
+                collegeName: data.collegeName || "Unknown College", // ✅ Create if not exists
+              },
+              update: {
+                collegeName: data.collegeName, // ✅ Update if exists
+              },
+            },
+          },
+        },
+        include: { student: true },
       });
 
-      console.log("✅ Student updated successfully:", updatedStudent);
-      return updatedStudent;
+      console.log("✅ Student updated successfully:", updatedUser);
+      return updatedUser;
     } catch (error) {
       console.error("❌ Error updating student:", error);
       throw new Error("Failed to update student profile.");
