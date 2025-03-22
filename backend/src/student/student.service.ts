@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable prettier/prettier */
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma.service";
-import { UpdateStudentDto } from "../student/update-student.dto";
+import { UpdateStudentDto } from "./update-student.dto";
 
 @Injectable()
 export class StudentService {
@@ -14,8 +11,8 @@ export class StudentService {
     console.log("🔍 Fetching Student by ID:", id);
 
     if (!id) {
-      console.error("❌ User ID is undefined. Authentication might be failing.");
-      throw new Error("User ID is missing. Cannot fetch student profile.");
+      console.error("❌ Missing user ID.");
+      throw new Error("User ID is required.");
     }
 
     try {
@@ -30,6 +27,7 @@ export class StudentService {
           student: {
             select: {
               collegeName: true,
+              skills: true,
             },
           },
         },
@@ -40,6 +38,21 @@ export class StudentService {
         throw new Error("Student not found.");
       }
 
+      // ✅ Parse skills JSON before sending response
+      if (student.student?.skills) {
+        try {
+          student.student.skills = Array.isArray(student.student.skills) 
+            ? student.student.skills 
+            : typeof student.student.skills === 'string' 
+              ? JSON.parse(student.student.skills) 
+              : [];
+        } catch (error) {
+          console.warn("⚠️ Failed to parse skills JSON. Returning empty array.");
+          student.student.skills = [];
+        }
+      }
+      
+
       return student;
     } catch (error) {
       console.error("❌ Error fetching student:", error);
@@ -47,16 +60,24 @@ export class StudentService {
     }
   }
 
-  // ✅ Update Student Profile
+  // ✅ Update Student Profile (Including Profile Picture & Skills)
   async updateStudent(id: string, data: UpdateStudentDto) {
-    console.log("🔄 Updating Student in DB:", id, data);
-
+    console.log("🔄 Updating Student:", id, data);
+    console.log("🛠 Received skills data:", data.skills);
+  
     if (!id) {
-      console.error("❌ Cannot update student: Missing ID.");
-      throw new Error("User ID is missing. Cannot update student profile.");
+      console.error("❌ Missing User ID.");
+      throw new Error("User ID is required.");
     }
-
+  
     try {
+      // ✅ Ensure `skills` is stored as JSON
+      const formattedSkills = data.skills && Array.isArray(data.skills) 
+        ? JSON.stringify(data.skills) 
+        : "[]"; // Default to empty array if undefined
+  
+      console.log("📌 Storing formatted skills:", formattedSkills);
+  
       const updatedUser = await this.prisma.user.update({
         where: { id },
         data: {
@@ -64,21 +85,23 @@ export class StudentService {
           email: data.email,
           phoneNumber: data.phoneNumber,
           gender: data.gender,
-          profilePicture: data.profilePicture || null,
+          profilePicture: data.profilePicture || undefined,
           student: {
             upsert: {
               create: {
-                collegeName: data.collegeName || "Unknown College", // ✅ Create if not exists
+                collegeName: data.collegeName || "Unknown College",
+                skills: formattedSkills, // ✅ Store JSON string
               },
               update: {
-                collegeName: data.collegeName, // ✅ Update if exists
+                collegeName: data.collegeName,
+                skills: formattedSkills, // ✅ Ensure update happens
               },
             },
           },
         },
         include: { student: true },
       });
-
+  
       console.log("✅ Student updated successfully:", updatedUser);
       return updatedUser;
     } catch (error) {
@@ -86,4 +109,4 @@ export class StudentService {
       throw new Error("Failed to update student profile.");
     }
   }
-}
+}  

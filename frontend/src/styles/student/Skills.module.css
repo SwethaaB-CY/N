@@ -1,0 +1,106 @@
+.skillsContainer {
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .subHeading {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .inputSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .radioGroup {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .radioLabel {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .skillList {
+    margin-top: 20px;
+  }
+  
+  .skillItem {
+    background: #f3f3f3;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .addButton,
+  .saveButton,
+  .editButton {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  
+  .addButton:hover,
+  .saveButton:hover,
+  .editButton:hover {
+    background: #0056b3;
+  }
+  
+  .addButton {
+    background: #28a745;
+  }
+  
+  .addButton:hover {
+    background: #218838;
+  }
+  
+  .saveButton {
+    background: #007bff;
+  }
+  
+  .saveButton:hover {
+    background: #0056b3;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .skillsContainer {
+      max-width: 90%;
+    }
+  
+    .radioGroup {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+  
+    .input {
+      width: 100%;
+    }
+  }
+  

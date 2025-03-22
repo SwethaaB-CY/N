@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable prettier/prettier */
-
 import { 
   Controller, 
   Get, 
@@ -14,75 +10,85 @@ import {
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { StudentService } from "./student.service";
-import { UpdateStudentDto } from "../student/update-student.dto"; 
+import { UpdateStudentDto } from "./update-student.dto"; 
 import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 import { extname, join } from "path";
-import { Express } from "express"; // ✅ Fix for Multer.File type
+import { Express } from "express"; 
 
-@Controller("student") // ✅ Base route: /student
+@Controller("student") // Base route: /student
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-  // ✅ Get Full Student Profile
-  @Get("me") // Route: GET /student/me
+  // ✅ Get Student Profile
+  @Get("me") 
   @UseGuards(AuthGuard("jwt"))
   async getStudentProfile(@Request() req) {
     console.log("📢 Request User:", req.user);
 
     if (!req.user?.id) {
-      console.error("❌ User ID is missing in the request!");
+      console.error("❌ User ID is missing!");
       throw new Error("User authentication failed");
     }
 
     return this.studentService.getStudentById(req.user.id);
   }
 
-  // ✅ Update Student Personal Info with Profile Picture Upload
-  @Put("me") // Route: PUT /student/me
+  // ✅ Update Student Profile with File Upload
+  @Put("me") 
   @UseGuards(AuthGuard("jwt"))
   @UseInterceptors(
     FileInterceptor("profilePicture", {
       storage: diskStorage({
-        destination: join(__dirname, "../../uploads"), // ✅ Ensuring correct path
+        destination: join(__dirname, "../../uploads/profile_pictures"), // Save in /uploads/profile_pictures
         filename: (req, file, callback) => {
           const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-          const newFileName = `${file.fieldname}-${uniqueSuffix}${extname(file.originalname)}`;
+          const newFileName = `profile-${uniqueSuffix}${extname(file.originalname)}`;
           console.log("📁 Saving file:", newFileName);
           callback(null, newFileName);
         },
       }),
+      fileFilter: (req, file, callback) => {
+        if (!file.mimetype.match(/\/(jpg|jpeg|png)$/)) {
+          return callback(new Error("Only JPG, JPEG, and PNG images are allowed!"), false);
+        }
+        callback(null, true);
+      },
     })
   )
-async updateStudentProfile(
-  @Request() req,
-  @Body() updateStudentDto: UpdateStudentDto,
-  @UploadedFile() file: Express.Multer.File
-) {
-  console.log("🔄 Updating Student ID:", req.user?.id);
+  async updateStudentProfile(
+    @Request() req,
+    @Body() updateStudentDto: UpdateStudentDto,
+    @UploadedFile() file?: Express.Multer.File
+  ) {
+    console.log("🔄 Updating Student ID:", req.user?.id);
 
-  if (!req.user?.id) {
-    console.error("❌ User ID is missing!");
-    throw new Error("Unauthorized access");
-  }
-
-  try {
-    // ✅ Update profile picture if uploaded
-    if (file) {
-      console.log("✅ Uploaded file:", file.filename);
-      updateStudentDto.profilePicture = `/uploads/${file.filename}`;
-      console.log("📷 Profile picture path saved:", updateStudentDto.profilePicture);
-    } else {
-      console.warn("⚠️ No file uploaded, keeping existing profile picture.");
+    if (!req.user?.id) {
+      console.error("❌ User ID is missing!");
+      throw new Error("Unauthorized access");
     }
 
-    const updatedStudent = await this.studentService.updateStudent(req.user.id, updateStudentDto);
-    console.log("✅ Student updated successfully:", updatedStudent);
+    try {
+      // ✅ Handle profile picture upload
+      if (file) {
+        console.log("✅ Uploaded file:", file.filename);
+        updateStudentDto.profilePicture = `/uploads/profile_pictures/${file.filename}`;
+      } else {
+        console.warn("⚠️ No profile picture uploaded.");
+      }
 
-    return { message: "Profile updated successfully", student: updatedStudent };
-  } catch (error) {
-    console.error("❌ Error updating student profile:", error);
-    throw new Error("Failed to update student profile.");
+      // ✅ Convert skills array to JSON string before saving
+      if (updateStudentDto.skills) {
+        updateStudentDto.skills = JSON.parse(JSON.stringify(updateStudentDto.skills)) as { name: string; level: string }[];
+      }
+
+      const updatedStudent = await this.studentService.updateStudent(req.user.id, updateStudentDto);
+      console.log("✅ Student updated successfully:", updatedStudent);
+
+      return { message: "Profile updated successfully", student: updatedStudent };
+    } catch (error) {
+      console.error("❌ Error updating student profile:", error);
+      throw new Error("Failed to update student profile.");
+    }
   }
-}
 }

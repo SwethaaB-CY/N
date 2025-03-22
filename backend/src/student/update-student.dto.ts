@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsOptional, IsString, IsEmail } from "class-validator";
+import { IsOptional, IsString, IsEmail, IsArray, IsNumber } from "class-validator";
 
 export class UpdateStudentDto {
   @IsOptional()
@@ -20,15 +20,13 @@ export class UpdateStudentDto {
 
   @IsOptional()
   @IsString()
-  collegeName?: string;
+  profilePicture?: string;
 
   @IsOptional()
   @IsString()
-  profilePicture?: string;
-  skills: any;
-  certifications: any;
-  achievements: any;
-  projects: any;
-  socialLinks: any;
-  resumeFile: string;
+  collegeName?: string;
+
+  @IsOptional()
+  @IsArray()
+  skills?: { name: string; level: string }[]; // ✅ Ensure it's an array of objects
 }

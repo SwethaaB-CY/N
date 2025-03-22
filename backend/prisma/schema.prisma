@@ -31,11 +31,13 @@ model User {
 
 model Student {
   userId            String   @id
-  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User     @relation(fields: [userId], references: [id])
 
   // Student-specific fields
-  collegeName       String
+  collegeName  String  // ✅ Add this line
+  skills      Json? // Stores skills as JSON objects: [{ "name": "React", "level": "Advanced" }]
 
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
+
