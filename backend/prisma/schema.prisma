@@ -7,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
   id               String    @id @default(uuid())
   fullName         String
@@ -41,9 +40,9 @@ model Student {
 }
 
 model Quiz {
-  id             String  @id @default(uuid())
-  userId         String  // Links to the Student
-  student        Student @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  id      String  @id @default(uuid())
+  userId  String // Links to the Student
+  student Student @relation(fields: [userId], references: [userId], onDelete: Cascade)
 
   title          String
   totalQuestions Int
