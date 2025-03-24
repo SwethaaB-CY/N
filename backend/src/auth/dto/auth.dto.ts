@@ -11,7 +11,7 @@ export class SignupDto {
   password: string;
 
   @IsNotEmpty()
-  userType: 'user' | 'admin';
+  userType: 'student' | 'admin' | 'recruiter' | 'placement-officer';
 }
 
 import { IsString } from 'class-validator';

@@ -9,13 +9,16 @@ const API = axios.create({
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
+    console.log("🔗 Attaching Token:", token); // Debugging
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
+    
     return config;
   },
   (error) => Promise.reject(error)
 );
+
 
 // API call wrapper with error handling
 export const fetchData = async (endpoint: string) => {

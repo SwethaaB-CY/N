@@ -56,10 +56,7 @@ const Sidebar: React.FC = () => {
             <FaUser className={styles.icon} />
             <span>Personal Info</span>
           </li>
-          <li onClick={() => router.push("/student/Register")} style={{ cursor: "pointer" }}> 
-            <FaUser className={styles.icon} />
-            <span>Student Details</span>
-          </li>
+          
           <li onClick={() => window.open("http://localhost:3001", "_blank")} style={{ cursor: "pointer" }}>
               <FaFileAlt className={styles.icon} />
               <span>AI Resume Generator</span>

@@ -48,7 +48,6 @@ const TopBar: React.FC<TopBarProps> = ({ studentName }) => {
           <img src={profilePicture} alt="Student Profile" onError={() => setProfilePicture("/images/Profile.png")} />
           <div className={styles.userInfo}>
             <span className={styles.name}>{studentName || "Student"}</span>
-            <span className={styles.year}>year</span>
           </div>
         </div>
 

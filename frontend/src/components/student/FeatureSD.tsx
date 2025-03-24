@@ -7,9 +7,16 @@ const FeatureSD: React.FC = () => {
   const router = useRouter();
 
   const handleNavigation = (title: string) => {
-    
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to access this feature.");
+      return;
+    }
+  
     if (title === "Skills") {
       router.push("/student/skill");
+    } else if (title === "Skill Assessment") {
+      window.location.href = `http://localhost:3001?token=${token}`;
     }
   };
 
@@ -25,11 +32,12 @@ const FeatureSD: React.FC = () => {
     <div className={styles.featureContainer}>
       {features.map((feature, index) => (
         <div
-          key={index}
-          className={styles.card}
-          onClick={() => handleNavigation(feature.title)}
-          style={{ cursor: feature.title === "Skill Assessment" || feature.title === "Skills" ? "pointer" : "default" }}
-        >
+        key={index}
+        className={styles.card}
+        onClick={() => handleNavigation(feature.title)}
+        style={{ cursor: feature.title === "Skill Assessment" || feature.title === "Skills" ? "pointer" : "default" }}
+        aria-label={`Feature: ${feature.title}`}
+      >
           <div className={styles.icon}>{feature.icon}</div>
           <h3>{feature.title}</h3>
           <p>{feature.desc}</p>

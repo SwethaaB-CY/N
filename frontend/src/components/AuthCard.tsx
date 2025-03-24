@@ -51,17 +51,22 @@ const AuthCard: React.FC<AuthCardProps> = ({ closeAuth }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-
+  
     if (!validateEmail(formData.email)) {
       setError("Please enter a valid email address.");
       return;
     }
-
+  
     if (isSignup && !validatePassword(formData.password)) {
       setError("Password must be at least 8 characters long, include one uppercase letter, one number, and one special character.");
       return;
     }
-
+  
+    if (isSignup && formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+  
     try {
       let response;
       if (isSignup) {
@@ -71,7 +76,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ closeAuth }) => {
           password: formData.password,
           userType,
         });
-
+  
         alert("Signup successful! Please log in.");
         setIsSignup(false);
       } else {
@@ -80,30 +85,42 @@ const AuthCard: React.FC<AuthCardProps> = ({ closeAuth }) => {
           password: formData.password,
         });
 
-        const { token, userType } = response.data;
-        if (!userType) {
-          setError("Invalid user type. Please try again.");
+        console.log("🔥 New Token from Backend:", response.data.token);
+  
+        const token = response?.data?.token;
+        const userType = response?.data?.userType;
+  
+        if (!token) {
+          setError("Invalid login credentials. Please try again.");
           return;
         }
-
-        alert("Login successful!");
+  
         localStorage.setItem("token", token);
         localStorage.setItem("userType", userType);
-
+  
+        alert("Login successful!");
+  
         const dashboardRoutes: Record<string, string> = {
           Student: "/dashboard/student-dashboard",
           Recruiter: "/dashboard/recruiter-dashboard",
           Admin: "/dashboard/admin-dashboard",
           "Placement Officer": "/dashboard/placement-dashboard",
         };
-
-        router.push(dashboardRoutes[userType] || "/");
+  
+        if (!dashboardRoutes[userType]) {
+          setError("Invalid user type. Please contact support.");
+          return;
+        }
+  
+        router.push(dashboardRoutes[userType]);
       }
     } catch (error: any) {
       setError(error.response?.data?.message || "An error occurred");
     }
   };
-
+  
+  
+  
   return (
     <div className={`auth-overlay ${visible ? "show" : "hide"}`}>
       <div className={`auth-card ${visible ? "slide-in" : "slide-out"}`}>

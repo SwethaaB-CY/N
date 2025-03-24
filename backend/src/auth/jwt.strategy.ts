@@ -1,27 +1,26 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { ConfigService } from '@nestjs/config';
+
+interface JwtPayload {
+  userId: string;
+  email: string;
+  fullName: string;
+}
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
-  constructor() {
+  constructor(private readonly configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.JWT_SECRET || 'default_secret',
+      secretOrKey: configService.get<string>('JWT_SECRET'), // ✅ Use ConfigService
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
-  async validate(payload: any) {
-    console.log("Decoded JWT Payload:", payload); // 🔍 Debugging line
-
+  async validate(payload: JwtPayload) {
     if (!payload?.userId) {
-      console.error("❌ Invalid JWT payload! Missing userId.");
-      throw new Error("Invalid token");
+      throw new UnauthorizedException('Invalid or expired token');
     }
 
     return { id: payload.userId, email: payload.email, fullName: payload.fullName };
