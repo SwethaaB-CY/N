@@ -57,7 +57,7 @@ const Sidebar: React.FC = () => {
             <span>Personal Info</span>
           </li>
           
-          <li onClick={() => window.open("http://localhost:3001", "_blank")} style={{ cursor: "pointer" }}>
+          <li onClick={() => window.open("https://cy-resume-module.vercel.app/", "_blank")} style={{ cursor: "pointer" }}>
               <FaFileAlt className={styles.icon} />
               <span>AI Resume Generator</span>
           </li>
