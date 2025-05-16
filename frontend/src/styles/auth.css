@@ -30,7 +30,7 @@
   }
   
   /* Heading */
-  .h2 {
+  h2 {
     font-size: 22px;
     margin-bottom: 15px;
     font-weight: bold;

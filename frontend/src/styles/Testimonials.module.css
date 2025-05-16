@@ -1,108 +1,97 @@
-/* Testimonials Section */
-.testimonials-section {
-    text-align: center;
-    padding: 80px 20px;
-    background: #f9f9f9;
-  }
-  
-  /* Testimonials Heading */
-  .testimonials-heading {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 40px;
-    font-weight: bold;
-  }
-  
-  /* Slick Slider */
-  .testimonials-slider {
-    max-width: 90%;
-    margin: auto;
-  }
-  
-  /* Testimonial Card */
-  .testimonial-card {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row; /* Horizontal layout */
-    align-items: center;
-    gap: 30px;
-    max-width: 700px; /* Bigger card horizontally */
-    margin: auto;
-  }
-  
-  /* Hover Effect */
-  .testimonial-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Testimonial Avatar */
-  .testimonial-avatar {
-    font-size: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 120px;
-    height: 120px;
-    background: #76cedf;
-    color: white;
-    border-radius: 50%;
-    font-weight: bold;
-    margin-bottom: 30px;
-  }
-  
-  /* Testimonial Content */
-  .testimonial-content {
-    text-align: left;
-    flex: 1;
-  }
-  
-  /* Testimonial Name */
-  .testimonial-name {
-    font-size: 1.8rem;
-    color: #333;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  /* Testimonial Role */
-  .testimonial-role {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 15px;
-  }
-  
-  /* Testimonial Text */
-  .testimonial-text {
-    font-size: 1.1rem;
-    color: #444;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-  
-  /* Testimonial Rating */
-  .testimonial-rating {
-    font-size: 1.4rem;
-    color: #ffc107;
-  }
-  
-  /* Slick Dots */
-  .slick-dots {
-    bottom: -30px;
-  }
-  
-  .slick-dots li button:before {
-    color: #333;
-    font-size: 14px;
-  }
-  
-  .slick-dots li.slick-active button:before {
-    color: #76cedf;
-  }
-  
+/* Testimonials.module.css */
+.testimonialsSection {
+  text-align: center;
+  padding: 80px 20px;
+  background: #f9f9f9;
+}
+
+.testimonialsHeading {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+.testimonialsSlider {
+  max-width: 90%;
+  margin: auto;
+}
+
+.testimonialCard {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.testimonialCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.2);
+}
+
+.testimonialAvatar {
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background: #76cedf;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.testimonialContent {
+  text-align: left;
+  flex: 1;
+}
+
+.testimonialName {
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.testimonialRole {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.testimonialText {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.testimonialRating {
+  font-size: 1.4rem;
+  color: #ffc107;
+}
+
+/* Slick Dots */
+.slick-dots {
+  bottom: -30px;
+}
+
+.slick-dots li button:before {
+  color: #333;
+  font-size: 14px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #76cedf;
+}

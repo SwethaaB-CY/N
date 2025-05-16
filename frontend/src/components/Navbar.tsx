@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import "../styles/Navbar.module.css";
+import styles from "../styles/Navbar.module.css";
 
 interface NavbarProps {
   onLoginClick: () => void;
@@ -47,39 +47,50 @@ export default function Navbar({ onLoginClick }: NavbarProps) {
   };
 
   return (
-    <nav className="navbar">
-      <div className="logo">
+    <nav className={styles.navbar}>
+      <div className={styles.logo}>
         <Link href="/">LOGO</Link>
       </div>
 
-      <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
-        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
-        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
+      <div
+        className={styles.hamburger}
+        onClick={() => setMenuOpen(!menuOpen)}
+        role="button"
+        aria-label="Toggle menu"
+      >
+        <div className={`${styles.bar} ${menuOpen ? styles.open : ""}`}></div>
+        <div className={`${styles.bar} ${menuOpen ? styles.open : ""}`}></div>
+        <div className={`${styles.bar} ${menuOpen ? styles.open : ""}`}></div>
       </div>
 
-      <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+      <ul className={`${styles["nav-links"]} ${menuOpen ? styles.active : ""}`}>
         <li>
-          <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link href="/" onClick={() => setMenuOpen(false)}>
+            Home
+          </Link>
         </li>
 
         {isLoggedIn && (
           <li>
-            <Link href={dashboardPath} onClick={() => setMenuOpen(false)}>Dashboard</Link>
+            <Link href={dashboardPath} onClick={() => setMenuOpen(false)}>
+              Dashboard
+            </Link>
           </li>
         )}
 
         <li>
-          <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
+          <Link href="/about" onClick={() => setMenuOpen(false)}>
+            About
+          </Link>
         </li>
 
         <li>
           {isLoggedIn ? (
-            <button className="logout-btn" onClick={handleLogout}>
+            <button className={styles["logout-btn"]} onClick={handleLogout}>
               Logout
             </button>
           ) : (
-            <button className="login-btn" onClick={onLoginClick}>
+            <button className={styles["login-btn"]} onClick={onLoginClick}>
               Login
             </button>
           )}

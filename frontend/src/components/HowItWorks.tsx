@@ -1,7 +1,6 @@
-import React, { JSX } from "react";
-import "../styles/HowItWorks.module.css"; // Ensure this file exists
+import React from "react";
+import styles from "../styles/HowItWorks.module.css";
 
-// Define the type for each step
 interface Step {
   title: string;
   description: string;
@@ -41,20 +40,25 @@ const steps: Step[] = [
   },
 ];
 
-export default function HowItWorks(): JSX.Element {
+export default function HowItWorks() {
+  const shapeClasses = [styles.stepCircle, styles.stepHexagon, styles.stepRectangle];
+
   return (
-    <div className="how-it-works-section">
-      <h2 className="how-it-works-heading">How It Works: Your Path to Success</h2>
-      <div className="steps-container">
-        {steps.map((step, index) => (
-          <div key={index} className="step-wrapper">
-            <div className="step-card">
-              <div className="step-icon">{step.icon}</div>
-              <h3 className="step-title">{step.title}</h3>
-              <p className="step-description">{step.description}</p>
+    <div className={styles.howItWorksSection}>
+      <h2 className={styles.howItWorksHeading}>How It Works: Your Path to Success</h2>
+      <div className={styles.stepsContainer}>
+        {steps.map((step, index) => {
+          const shapeClass = shapeClasses[index % shapeClasses.length];
+          return (
+            <div key={index} className={styles.stepWrapper}>
+              <div className={`${styles.stepCard} ${shapeClass}`}>
+                <div className={styles.stepIcon}>{step.icon}</div>
+              </div>
+              <h3 className={styles.stepTitle}>{step.title}</h3>
+              <p className={styles.stepDescription}>{step.description}</p>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

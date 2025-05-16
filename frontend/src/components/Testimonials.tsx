@@ -2,9 +2,8 @@ import React, { JSX } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../styles/Testimonials.module.css"; // Ensure this file exists
+import styles from "../styles/Testimonials.module.css"; // CSS module import
 
-// Define the type for each testimonial
 interface Testimonial {
   name: string;
   role: string;
@@ -13,7 +12,6 @@ interface Testimonial {
   avatar: string;
 }
 
-// Testimonials data
 const testimonials: Testimonial[] = [
   {
     name: "Alice",
@@ -43,13 +41,13 @@ export default function Testimonials(): JSX.Element {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 2, // Show 2 cards at a time (for large screens)
+    slidesToShow: 2,
     slidesToScroll: 1,
-    autoplay: true, // Enable automatic sliding
-    autoplaySpeed: 1500, // Change slides every 1.5 seconds
+    autoplay: true,
+    autoplaySpeed: 1500,
     responsive: [
       {
-        breakpoint: 768, // For tablets & small screens
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
         },
@@ -58,17 +56,17 @@ export default function Testimonials(): JSX.Element {
   };
 
   return (
-    <div className="testimonials-section">
-      <h2 className="testimonials-heading">What Our Users Say</h2>
-      <Slider {...settings} className="testimonials-slider">
+    <div className={styles.testimonialsSection}>
+      <h2 className={styles.testimonialsHeading}>What Our Users Say</h2>
+      <Slider {...settings} className={styles.testimonialsSlider}>
         {testimonials.map((testimonial, index) => (
-          <div key={index} className="testimonial-card">
-            <span className="testimonial-avatar">{testimonial.avatar}</span>
-            <div className="testimonial-content">
-              <h3 className="testimonial-name">{testimonial.name}</h3>
-              <p className="testimonial-role">{testimonial.role}</p>
-              <p className="testimonial-text">{testimonial.text}</p>
-              <p className="testimonial-rating">{testimonial.rating}</p>
+          <div key={index} className={styles.testimonialCard}>
+            <span className={styles.testimonialAvatar}>{testimonial.avatar}</span>
+            <div className={styles.testimonialContent}>
+              <h3 className={styles.testimonialName}>{testimonial.name}</h3>
+              <p className={styles.testimonialRole}>{testimonial.role}</p>
+              <p className={styles.testimonialText}>{testimonial.text}</p>
+              <p className={styles.testimonialRating}>{testimonial.rating}</p>
             </div>
           </div>
         ))}

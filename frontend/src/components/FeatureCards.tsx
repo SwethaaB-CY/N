@@ -1,14 +1,12 @@
 import { useState } from "react";
-import "../styles/FeatureCards.module.css"; // Ensure this file exists
+import styles from "../styles/FeatureCards.module.css"; // Correct import for CSS Module
 
-// Define TypeScript interface for feature items
 interface Feature {
   title: string;
   description: string;
   icon: string;
 }
 
-// Feature data with proper typing
 const features: Feature[] = [
   {
     title: "AI Resume Scoring",
@@ -51,20 +49,20 @@ const FeatureCards: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <div className="feature-section">
-      <h2 className="feature-heading">Why Choose Us?</h2>
-      <div className="feature-container">
+    <div className={styles.featureSection}>
+      <h2 className={styles.featureHeading}>Why Choose Us?</h2>
+      <div className={styles.featureContainer}>
         {features.map((feature, index) => (
           <div
             key={index}
-            className={`feature-card ${activeIndex === index ? "active" : ""}`}
+            className={`${styles.featureCard} ${activeIndex === index ? styles.active : ""}`}
             onMouseEnter={() => setActiveIndex(index)}
             onMouseLeave={() => setActiveIndex(null)}
             onClick={() => setActiveIndex(activeIndex === index ? null : index)}
           >
-            <span className="feature-icon">{feature.icon}</span>
-            <h3 className="feature-title">{feature.title}</h3>
-            <p className="feature-description">{feature.description}</p>
+            <span className={styles.featureIcon}>{feature.icon}</span>
+            <h3 className={styles.featureTitle}>{feature.title}</h3>
+            <p className={styles.featureDescription}>{feature.description}</p>
           </div>
         ))}
       </div>

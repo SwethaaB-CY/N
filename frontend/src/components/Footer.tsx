@@ -1,14 +1,14 @@
 import React from "react";
-import "../styles/Footer.module.css"; // Ensure this file exists
+import styles from "../styles/Footer.module.css"; // Correct CSS module import
 
 const Footer: React.FC = () => {
   return (
-    <footer className="footer-section">
-      <div className="footer-content">
+    <footer className={styles.footerSection}>
+      <div className={styles.footerContent}>
         {/* Quick Links */}
-        <div className="footer-links">
-          <h3 className="footer-heading">Quick Links</h3>
-          <ul>
+        <div className={styles.footerColumn}>
+          <h3 className={styles.footerHeading}>Quick Links</h3>
+          <ul className={styles.footerList}>
             <li><a href="/about">About Us</a></li>
             <li><a href="/contact">Contact Us</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
@@ -17,9 +17,9 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Social Media Links */}
-        <div className="footer-social">
-          <h3 className="footer-heading">Follow Us</h3>
-          <div className="social-icons">
+        <div className={styles.footerColumn}>
+          <h3 className={styles.footerHeading}>Follow Us</h3>
+          <div className={styles.socialIcons}>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
@@ -27,17 +27,17 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Contact Information */}
-        <div className="footer-contact">
-          <h3 className="footer-heading">Contact Us</h3>
-          <p>Email: support@chiselyourself.com</p>
+        {/* Contact Info */}
+        <div className={styles.footerColumn}>
+          <h3 className={styles.footerHeading}>Contact Us</h3>
+          <p>Email: <a href="mailto:support@chiselyourself.com">support@chiselyourself.com</a></p>
           <p>Phone: +1 (123) 456-7890</p>
         </div>
       </div>
 
-      {/* Copyright Notice */}
-      <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Chisel Yourself. All rights reserved.</p>
+      {/* Copyright */}
+      <div className={styles.footerBottom}>
+        <p>&copy; {new Date().getFullYear()} <strong>Chisel Yourself</strong>. All rights reserved.</p>
       </div>
     </footer>
   );
