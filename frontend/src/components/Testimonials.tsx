@@ -2,7 +2,7 @@ import React, { JSX } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../styles/Testimonials.css"; // Ensure this file exists
+import "../styles/Testimonials.module.css"; // Ensure this file exists
 
 // Define the type for each testimonial
 interface Testimonial {

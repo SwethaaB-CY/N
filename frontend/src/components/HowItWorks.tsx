@@ -1,5 +1,5 @@
 import React, { JSX } from "react";
-import "../styles/HowItWorks.css"; // Ensure this file exists
+import "../styles/HowItWorks.module.css"; // Ensure this file exists
 
 // Define the type for each step
 interface Step {

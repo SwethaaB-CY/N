@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import "../styles/Navbar.css";
+import "../styles/Navbar.module.css";
 
 interface NavbarProps {
   onLoginClick: () => void;

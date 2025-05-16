@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../styles/FeatureCards.css"; // Ensure this file exists
+import "../styles/FeatureCards.module.css"; // Ensure this file exists
 
 // Define TypeScript interface for feature items
 interface Feature {

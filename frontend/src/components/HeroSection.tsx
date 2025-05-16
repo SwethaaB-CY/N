@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import AuthCard from "./AuthCard"; // Assuming AuthCard is in the same folder
-import "../styles/hero.css";
+import "../styles/hero.module.css";
 
 const images: string[] = [
   "/images/success.jpg",

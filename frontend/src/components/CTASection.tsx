@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AuthCard from "./AuthCard"; // Import AuthCard component
-import "../styles/CTASection.css"; // Ensure this file exists
+import "../styles/CTASection.module.css"; // Ensure this file exists
 
 const CTASection: React.FC = () => {
   const [showAuthCard, setShowAuthCard] = useState<boolean>(false);
