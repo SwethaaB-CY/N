@@ -7,20 +7,21 @@ const FeatureSD: React.FC = () => {
   const router = useRouter();
 
   const handleNavigation = (title: string) => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("You must be logged in to access this feature.");
-      return;
-    }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("You must be logged in to access this feature.");
+    return;
+  }
 
-    if (title === "Skills") {
-      router.push("/student/skill");
-    } else if (title === "Skill Assessment") {
-      window.location.href = `http://localhost:3001?token=${token}`;
-    } else if (title === "Mock Interview") {
-      window.location.href = `http://localhost:3002?token=${token}`;
-    }
-  };
+  if (title === "Skills") {
+    router.push("/student/skill");
+  } else if (title === "Skill Assessment") {
+    window.location.href = `https://quiz-lac-phi.vercel.app/?token=${token}`;
+  } else if (title === "Mock Interview") {
+    window.location.href = `http://localhost:3002?token=${token}`;
+  }
+};
+
 
   const features = [
     { icon: <FaTasks size={35} color="#EE93BE" />, title: "Track Applications", desc: "Check status" },
