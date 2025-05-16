@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "@/styles/Settings.module.css";
+import styles from "../styles/student/Settings.module.css"; // Adjust the path as necessary
 
 const Settings = () => {
   const [theme, setTheme] = useState("light");
