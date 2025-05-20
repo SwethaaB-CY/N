@@ -6,6 +6,10 @@
 body {
   font-family: "Roboto", Arial, sans-serif;
 }
+/* globals.css */
+button {
+  font-weight: bold;
+}
 
 :root {
   --background: #ffffff;
