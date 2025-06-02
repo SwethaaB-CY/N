@@ -14,11 +14,19 @@ const FeatureSD: React.FC = () => {
     }
 
     if (title === "Skills") {
-      router.push("/student/skill");
+      // Redirect with token in query param
+      router.push({
+        pathname: "/student/skill",
+        query: { token },
+      });
     } else if (title === "Skill Assessment") {
-      window.location.href = `http://localhost:3001?token=${token}`;
+      router.push({
+        pathname: "/quiz",
+        query: { token },
+      });
     } else if (title === "Mock Interview") {
-      window.location.href = `http://localhost:3002?token=${token}`;
+      // External link with token as query param
+      window.location.href = `http://localhost:3002?token=${encodeURIComponent(token)}`;
     }
   };
 

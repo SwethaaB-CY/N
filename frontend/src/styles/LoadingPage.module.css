@@ -1,0 +1,28 @@
+/* styles/LoadingPage.module.css */
+
+.container {
+  height: 100vh;
+  background-color: #f3eefe;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  animation: spin 2s linear infinite;
+  font-size: 3rem;
+  color: #7c3aed;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.text {
+  font-size: 1.25rem;
+  color: #6b21a8;
+  font-weight: 500;
+}

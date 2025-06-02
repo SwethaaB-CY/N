@@ -47,5 +47,8 @@ model Quiz {
   title          String
   totalQuestions Int
   score          Int
+  difficulty     String
+  time Int?  // time in seconds, optional
+
   createdAt      DateTime @default(now())
 }

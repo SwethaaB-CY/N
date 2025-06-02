@@ -1,81 +1,77 @@
-import { Controller, Post, Body, Req, UnauthorizedException, Inject } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Req,
+  UseGuards,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { QuizService } from './quiz.service';
+import { CreateQuizDto } from './dto/create-quiz.dto';
+import { GenerateQuizDto } from './dto/generate-quiz.dto';
 import { Request } from 'express';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { firstValueFrom } from 'rxjs';
-import { HttpService } from '@nestjs/axios';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard'; // ⚠️ adjust path as needed
 
-// ✅ DTO for validation
-class QuizDto {
-  @IsNotEmpty()
-  @IsString()
-  title: string;
-
-  @IsNotEmpty()
-  @IsNumber()
-  totalQuestions: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  score: number;
+interface AuthenticatedRequest extends Request {
+  user?: {
+    id: string;
+    email?: string;
+  };
 }
 
 @Controller('quiz')
 export class QuizController {
-  constructor(
-    private readonly jwtService: JwtService, // ✅ Inject JwtService
-    @Inject(HttpService) private readonly httpService: HttpService // ✅ Inject HttpService
-  ) {}
+  constructor(private readonly quizService: QuizService) {}
 
-  @Post('submit')
-async submitQuiz(@Req() req: Request, @Body() quizData: QuizDto) {
-  console.log("🔹 Received Quiz Submission Request");
-
-  const authHeader = req.headers.authorization;
-  console.log("🔹 Authorization Header:", authHeader);
-
-  if (!authHeader) {
-    console.error("❌ Authorization header missing");
-    throw new UnauthorizedException('Authorization header missing');
+  @Post('generate')
+  async generateQuiz(@Body() generateQuizDto: GenerateQuizDto) {
+    return this.quizService.generateQuiz(generateQuizDto);
   }
 
-  const token = authHeader.split(' ')[1];
-  if (!token) {
-    console.error("❌ JWT token missing");
-    throw new UnauthorizedException('JWT token missing');
+  @UseGuards(JwtAuthGuard)
+@Post('submit')
+async submitQuiz(@Body() createQuizDto: CreateQuizDto, @Req() req: AuthenticatedRequest) {
+  const userId = req.user?.id;
+  if (!userId) {
+    throw new UnauthorizedException('User must be authenticated to submit quiz');
   }
-
-  try {
-    const decodedUser = this.jwtService.verify(token);
-    console.log("✅ Decoded User:", decodedUser);
-
-    if (!decodedUser.userId) {
-      console.error("❌ User ID missing in token");
-      throw new UnauthorizedException('User ID missing in token');
-    }
-
-    // ✅ Ensure the title is correctly set before sending to Project B
-    const quizSubmission = {
-      userId: decodedUser.userId, // ✅ Ensure userId is sent
-      title: quizData.title, // ✅ Ensure title is passed correctly
-      totalQuestions: quizData.totalQuestions,
-      score: quizData.score,
-    };
-
-    console.log("✅ Sending quiz data to Project B (5001):", quizSubmission);
-
-    // ✅ Send request to Project B
-    const response = await firstValueFrom(
-      this.httpService.post('http://localhost:5001/quiz/submit', quizSubmission, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-    );
-
-    console.log("✅ Response from Project B:", response.data);
-    return response.data;
-  } catch (error) {
-    console.error("❌ Error submitting quiz:", error.response?.data || error.message);
-    throw new UnauthorizedException('Error submitting quiz');
-  }
+  return this.quizService.submitQuiz(userId, createQuizDto);
 }
+
+
+
+
+
+  @UseGuards(JwtAuthGuard)
+  @Get('latest-score')
+  async getLatestScore(@Req() req: AuthenticatedRequest) {
+    const userId = req.user?.id;
+    if (!userId) {
+      throw new UnauthorizedException('User must be authenticated to view score');
+    }
+    return this.quizService.getLatestScore(userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+@Get('leaderboard')
+async getLeaderboard(@Req() req: AuthenticatedRequest) {
+  const userId = req.user?.id;
+  if (!userId) {
+    throw new UnauthorizedException('User must be authenticated to view leaderboard');
+  }
+  return this.quizService.getLeaderboardByUser(userId);
+}
+
+
+@UseGuards(JwtAuthGuard)
+@Get('leaderboard/user')
+async getUserLeaderboard(@Req() req: AuthenticatedRequest) {
+  const userId = req.user?.id;
+  if (!userId) {
+    throw new UnauthorizedException('User must be authenticated');
+  }
+  return this.quizService.getLeaderboardByUser(userId);
+}
+
 }

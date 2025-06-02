@@ -1,0 +1,77 @@
+.container {
+  padding: 2rem;
+  background: #f6f3ff;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #6c2bd9;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  max-width: 950px;
+  margin: 0 auto;
+  box-shadow: 0 4px 14px rgba(108, 43, 217, 0.15);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #6c2bd9;
+  color: white;
+  padding: 1rem;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.newQuiz {
+  background-color: #f3f4f6;
+  color: #111827;
+  border: 1px solid #ccc;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table :global(th),
+.table :global(td) {
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.table :global(thead) {
+  color: #6c2bd9;
+  border-bottom: 1px solid #ccc;
+}
+
+.table :global(tbody tr:nth-child(even)) {
+  background-color: #f9f9ff;
+}
+
+.table :global(tbody td) {
+  color: #333;
+}
