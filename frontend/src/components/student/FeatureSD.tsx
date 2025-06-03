@@ -14,28 +14,31 @@ const FeatureSD: React.FC = () => {
     }
 
     if (title === "Skills") {
-      // Redirect with token in query param
-      router.push({
-        pathname: "/student/skill",
-        query: { token },
-      });
+      router.push("/student/skill");
     } else if (title === "Skill Assessment") {
+      // Preserve original logic from first code
       router.push({
         pathname: "/quiz",
         query: { token },
       });
+    } else if (title === "Coding Challenge") {
+      window.location.href = "https://v0-next-js-coding-platform-dun.vercel.app/";
+    } else if (title === "Roadmap Generation") {
+      window.location.href = "https://v0-new-project-srg6ehkl2tq.vercel.app/";
+    } else if (title === "Analytical Dasboard") {
+      window.location.href = "https://v0-ai-dashboard-blue.vercel.app/";
     } else if (title === "Mock Interview") {
-      // External link with token as query param
-      window.location.href = `http://localhost:3002?token=${encodeURIComponent(token)}`;
+      window.location.href = "https://v0-mock-interview-app-pi.vercel.app/";
     }
   };
 
   const features = [
-    { icon: <FaTasks size={35} color="#EE93BE" />, title: "Track Applications", desc: "Check status" },
+    { icon: <FaTools size={35} color="#FF6347" />, title: "Skills", desc: "Manage skills" },
     { icon: <FaFlag size={35} color="#7FFFD4" />, title: "Skill Assessment", desc: "Take a test" },
-    { icon: <FaFlag size={35} color="#7FFFD4" />, title: "Mock Interview", desc: "Take a mock" },
-    { icon: <FaChartLine size={35} color="#F68C1F" />, title: "Career Progress", desc: "Check now" },
-    { icon: <FaTools size={35} color="#FF6347" />, title: "Skills", desc: "Manage skills" }
+    { icon: <FaFlag size={35} color="#7FFFD4" />, title: "Coding Challenge", desc: "Take a challenge" },
+    { icon: <FaFlag size={35} color="#7FFFD4" />, title: "Mock Interview", desc: "Take a Moc" },
+    { icon: <FaTasks size={35} color="#EE93BE" />, title: "Roadmap Generation", desc: "Generate now" },
+    { icon: <FaChartLine size={35} color="#F68C1F" />, title: "Analytical Dasboard", desc: "Check now" }
   ];
 
   return (
@@ -47,9 +50,7 @@ const FeatureSD: React.FC = () => {
           onClick={() => handleNavigation(feature.title)}
           style={{
             cursor:
-              feature.title === "Skill Assessment" ||
-              feature.title === "Mock Interview" ||
-              feature.title === "Skills"
+              ["Skill Assessment", "Mock Interview", "Skills", "Coding Challenge", "Roadmap Generation", "Analytical Dasboard"].includes(feature.title)
                 ? "pointer"
                 : "default"
           }}

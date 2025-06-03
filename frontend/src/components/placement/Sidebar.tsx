@@ -55,11 +55,11 @@ const Sidebar: React.FC = () => {
                       <FaUser className={styles.icon} />
                       <span>Personal Info</span>
                     </li>
-          <li onClick={() => router.push("/student-placements")} style={{ cursor: "pointer" }}>
+          <li onClick={() => router.push("https://v0-student-recruiter-matching.vercel.app/students")} style={{ cursor: "pointer" }}>
             <FaUserGraduate className={styles.icon} />
             <span>Student Placements</span>
           </li>
-          <li onClick={() => router.push("/company-collaborations")} style={{ cursor: "pointer" }}>
+          <li onClick={() => router.push("https://v0-student-recruiter-matching.vercel.app/recruiters")} style={{ cursor: "pointer" }}>
             <FaBriefcase className={styles.icon} />
             <span>Company Collaborations</span>
           </li>

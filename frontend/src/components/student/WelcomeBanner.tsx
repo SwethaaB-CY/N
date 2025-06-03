@@ -23,8 +23,10 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ studentName }) => {
         <p className={styles.subtitle}>Always stay updated in your student portal</p>
       </div>
       <div className={styles.imageSection}>
-        <img src="/images/SD image.svg" alt="Welcome Illustration" />
-      </div>
+  <a href="https://v0-ginee.vercel.app/" target="_blank" rel="noopener noreferrer">
+    <img src="/images/image.png" alt="GENIE" className={styles.roundImage} />
+  </a>
+</div>
     </div>
   );
 };

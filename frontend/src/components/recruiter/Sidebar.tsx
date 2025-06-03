@@ -55,23 +55,23 @@ const Sidebar: React.FC = () => {
             <FaUser className={styles.icon} />
             <span>Personal Info</span>
           </li>
-          <li onClick={() => router.push("/recruiter/personalinfo")} style={{ cursor: "pointer" }}> 
+          <li onClick={() => router.push("https://v0-student-recruiter-matching.vercel.app/students")} style={{ cursor: "pointer" }}> 
             <FaUser className={styles.icon} />
             <span>Candidate Profile</span>
           </li>
-          <li onClick={() => router.push("/job-assessment")} style={{ cursor: "pointer" }}>
+          <li onClick={() => router.push("https://v0-student-recruiter-matching.vercel.app/analytics")} style={{ cursor: "pointer" }}>
             <FaClipboardList className={styles.icon} />
             <span>Job & Assessment Management</span>
           </li>
-          <li onClick={() => router.push("/interview-schedule")} style={{ cursor: "pointer" }}>
+          <li onClick={() => router.push("https://v0-fork-of-calendar-app-1e.vercel.app/")} style={{ cursor: "pointer" }}>
             <FaCalendarCheck className={styles.icon} />
             <span>Interview Schedule</span>
           </li>
-          <li onClick={() => router.push("/candidate-tracking")} style={{ cursor: "pointer" }}>
+          <li onClick={() => router.push("https://v0-ai-dashboard-beta.vercel.app/")} style={{ cursor: "pointer" }}>
             <FaChartLine className={styles.icon} />
             <span>Candidate Management & Tracking</span>
           </li>
-          <li onClick={() => router.push("/company-profile")} style={{ cursor: "pointer" }}>
+          <li onClick={() => router.push("https://v0-student-recruiter-matching.vercel.app/recruiters")} style={{ cursor: "pointer" }}>
             <FaBriefcase className={styles.icon} />
             <span>Company Profile</span>
           </li>
